@@ -1,0 +1,183 @@
+\documentclass[11pt]{article} 
+
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+\usepackage{tikz}
+\usepackage{textcomp}
+\usepackage[shortlabels]{enumitem}
+
+\newcommand{\doctitle}{ }
+\makeatletter
+\renewcommand{\ps@headings}{%
+\renewcommand{\@evenhead}{\parbox{\textwidth}{\hrulefill
+\fbox{\sffamily LC 2022}\hrulefill } }%
+\renewcommand{\@oddhead}{\parbox{\textwidth}{\hrulefill 
+\fbox{\sffamily LC 2022}\hrulefill}}}
+\makeatother
+
+
+\linespread{.9}
+\hoffset=-0in    \voffset=-.5in
+\oddsidemargin=0in   \evensidemargin=0in
+\topmargin=-.25in
+\textwidth=6.5in   \textheight=9.5in
+\columnseprule=.3pt  
+\setlength{\parskip}{1em}
+
+
+
+\usepackage{multirow}
+\usepackage{multicol} 
+\usepackage{braket}
+
+\newcommand{\mytitle}[1]{{
+\begin{centering}
+{\Large \sffamily LC 2022}\\
+\bigskip\bigskip{\Large \sffamily \bfseries{#1}}\\
+\bigskip\bigskip\end{centering}
+}}
+
+\newcommand{\mytitlecompact}[1]{{
+
+\hfill
+{\Large \sffamily \bfseries{#1}}
+\hfill
+%\bigskip
+}}
+
+
+\newcommand{\mysection}[1]{{
+\smallskip
+\noindent
+{\large \sffamily \bfseries{#1}}
+}}
+
+
+\newcommand{\mysubsection}[1]{{
+\smallskip
+{\sffamily \bfseries{#1}}
+}}
+
+\pagestyle{empty}
+\pagestyle{headings}
+
+\def\C{{\mathbb{C}}}
+\def\R{{\mathbb{R}}}
+\def\Q{{\mathbb{Q}}}
+\def\Z{{\mathbb{Z}}}
+\def\N{{\mathbb{N}}}
+\def\cA{{\mathcal{A}}}
+\def\cC{{\mathcal{C}}}
+\newcommand{\expectation}[1]{\langle #1\rangle}
+%\def\bra{\langle}
+%\def\ket{\rangle}
+
+\begin{document}
+%\newcommand⟨\expectation⟩[1][]{$\langle$ #1 $\rangle$}
+
+\mytitlecompact{Liquid Cyrstal Measurements Notes}
+%%
+\section*{Wedge Cell Measurements}
+(Mostly Aronzon Thesis)
+
+\subsection*{$\alpha$}
+Put the empty wedge cell on the track, shine laser on it. Put a sheet of paper next to the laser. The distance between the reflected dot and
+the laser is $l$. The distance between cell and laser is $L$. Then the angle the top of wedge cell makes is $\alpha$ and satisfies
+\begin{equation}
+    \tan(2\alpha) = \frac{l}{L}.
+\end{equation}
+\subsection*{n}
+Put a card at the far end of the track, shine laser through the empty wedge cell, mark the dot on the card. Fill the wedge cell with sample, shine laser
+through it, the displacement of the dot is, say $\Delta l$. Then we have 
+\begin{equation}
+    \tan{\delta} = \frac{\Delta l}{L}. 
+\end{equation}
+And \begin{equation}
+    \boxed{n = \frac{\sin{(\frac{\alpha+\delta}{2})}}{\sin{(\frac{\alpha}{2})}}}
+\end{equation}
+\section*{Index Determination}
+\subsection*{Index of Water}
+As our target solution are mostly water, we should at first try to find the relationship 
+between $n_{water}$ and $n_{sample}$. We can analytically calculate the $n_{water}$ by solving
+\begin{equation}
+    \frac{n_{water}^2-1}{n_{water}^2+1} (\frac{1}{\bar{\rho}})= a_0+a_1\bar{\rho}+a_2\bar{T}+a_3\bar{\lambda}^2\bar{T}
+    +\frac{a_4}{\bar{\lambda}}^2+\frac{a_5}{\bar{\lambda}^2-\bar{\lambda}_{UV}^2}+\frac{a_6}{\bar{\lambda}^2-\bar{\lambda}_{IR}^2}+
+a_7 \bar{\rho}^2,
+    \label{Index Of Refraction for Water}
+\end{equation}
+where $\bar{T} = \frac{T}{T^*}$, $\bar{\rho} = \frac{\rho}{\rho^*}$, and $\bar{\lambda} = \frac{\lambda}{\lambda^*}$. (Type in exactly what these quantities are later)
+
+\subsection*{$n_{\text{iso}}, n_{\perp}, n_{\parallel}$}
+From the property 
+\begin{equation}
+    n_{\text{iso}} = \frac{n_{\parallel}+2n_{\perp}}{3}
+\end{equation}
+and $n_{\parallel} - n_{\perp} = \Delta n$, we may deduce
+\begin{equation}
+    \boxed{n_{\parallel} = n_{\text{iso}} + \frac{2}{3} \Delta n}
+\end{equation}
+\begin{equation}
+    \boxed{n_{\perp} = n_{\text{iso}} -\frac{1}{3} \Delta n}
+\end{equation}
+
+\subsection*{Calculating $n$ at various temperature and wavelength}
+We have learned that from data given in Nastishi05, typically, ($n_{\text{iso}}-n_{\text{water}}\approx 0.03$).
+Therefore, what is left for us to do is to figure out how $\Delta n$ various with temperature and wavelength. The wavelength dependence is given in
+Nastishi05, for $15\%$ and $17\%$. What we did is just interpolated a line for $16\%$. This gives $\Delta n$ for various wavelength at $20^\circ C$. 
+The temperature dependece is generally given by the rule 
+\begin{equation}
+    \Delta n = \Delta n_0 (1-\frac{T}{T^*})^{\gamma}
+\end{equation}
+where $\Delta n_0, T^{*}$, and $\gamma$ are fit parameters. We acquired a fit for the function, and get 
+\[\Delta n_0 = -0.022\], $T^* = 31.75^\circ C$, and $\gamma = 0.082$. 
+To account for the difference in transition temperature between our sample
+and used in the paper, we modified the equation to be (for $\lambda=633$ nm):
+\begin{equation}
+    \Delta n = \Delta n_{20^\circ C} (1-\frac{T-1.3}{T^*})^{\gamma} \label{delta n 633, with t}
+\end{equation}
+to account for difference between transition temperature and plugged in exact value for $\Delta n_0 = Delta n_{20^\circ C}$ found in Nastishin05.
+
+Then, with the assumption that 
+\begin{equation}
+    \frac{\Delta n_{\lambda\text{, } 20^\circ\text{C}}}{\Delta n_{\lambda\text{, } t}}=
+    \frac{\Delta n_{633\text{nm, } 20^\circ\text{C}}}{\Delta n_{633\text{nm, } t}} \label{generalize delta n for different wavelength to temperature}
+\end{equation}
+We can use \ref{delta n 633, with t} to find $Delta n_{633\text{nm, } t}$, and with these, we are able to find $n_\perp$ and $n_\parallel$ for all wavelength and all temperatures. 
+
+\section*{Measurement Protocal}
+The detailed description of how to use the microscope. 
+\begin{enumerate}
+    \item No sample, set on parallel polarizers. 
+    
+    Post Processing $\leftarrow$ Shading Correction $\leftarrow$ Define. 
+
+
+    \item Add disred filter, parallel polarizer. Add water sample. Adjust exposure time and power to make desired curve fill up the spectrum. 
+    
+    \item Measure $I_\perp^w$ and $I_\parallel^w$. Also put a blocker under the microscope to measure $I_\perp^0$ and $I_\parallel^w0.$
+    \item Switch to sample. Set sample to desired temperature. Wait 2 minutes after temperature control hovers the desired limit. Be sure to selected the 
+the region that is darkest with crossed polarizer. Measure $I_\perp^s$ and $I_\parallel^s$ and $I_\perp^0$ and $I_\parallel^0$. 
+    \item After traversing all temperature, switch back to water and do the same measurement to make sure isotropicity is not violated. 
+    \item At high temperature (isotropic phase for samples), make measurement for sample again. 
+\end{enumerate}
+Empirically, a longer exposure time helps with averaging intensity. 
+The absorption at each temperature is 
+\begin{equation}
+    A_\parallel = \log_{10} \frac{I_\parallel^w-I_\parallel^0}{I_\parallel^s-I_\parallel^0},
+\end{equation}
+and 
+\begin{equation}
+    A_\perp = \log_{10} \frac{I_\perp^w-I_\perp^0}{I_\perp^s-I_\perp^0},
+\end{equation}
+\section*{Calculate $S$}
+Finally, we may calculate the order parameter
+\begin{equation}
+    \boxed{S = \frac{n_{\parallel}A_{\parallel}-n_{\perp}A_{\perp}}{n_{\parallel}A_{\parallel}+2n_{\perp}A_{\perp}}}
+\end{equation}
+
+
+\end{document}
+ 
+
+
+
